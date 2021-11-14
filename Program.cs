@@ -1,4 +1,6 @@
-﻿namespace MemoryGame
+﻿using System;
+
+namespace MemoryGame
 {
   internal class Program
   {
