@@ -5,3 +5,10 @@ C:\Users\ketch\Documents\GitHub\MemoryGame\obj\Debug\MemoryGame.csproj.AssemblyR
 C:\Users\ketch\Documents\GitHub\MemoryGame\obj\Debug\MemoryGame.csproj.CoreCompileInputs.cache
 C:\Users\ketch\Documents\GitHub\MemoryGame\obj\Debug\MemoryGame.exe
 C:\Users\ketch\Documents\GitHub\MemoryGame\obj\Debug\MemoryGame.pdb
+H:\Projet GitHub\MemoryGame\bin\Debug\MemoryGame.exe.config
+H:\Projet GitHub\MemoryGame\bin\Debug\MemoryGame.exe
+H:\Projet GitHub\MemoryGame\bin\Debug\MemoryGame.pdb
+H:\Projet GitHub\MemoryGame\obj\Debug\MemoryGame.csproj.AssemblyReference.cache
+H:\Projet GitHub\MemoryGame\obj\Debug\MemoryGame.csproj.CoreCompileInputs.cache
+H:\Projet GitHub\MemoryGame\obj\Debug\MemoryGame.exe
+H:\Projet GitHub\MemoryGame\obj\Debug\MemoryGame.pdb
