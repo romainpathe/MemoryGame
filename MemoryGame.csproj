@@ -44,6 +44,7 @@
     <Compile Include="Cards\Location.cs" />
     <Compile Include="Files\FilesManager.cs" />
     <Compile Include="Management\Status.cs" />
+    <Compile Include="Menu\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

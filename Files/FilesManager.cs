@@ -45,7 +45,7 @@ namespace MemoryGame.Files
                     FilesListSelected = new List<string>();
                     for (var i = 0; i < numberOfCard; i++)
                     { 
-                        var filesSelectedNumber = Program.Rdm.Next(0,tempFilesList.Count-1);
+                        var filesSelectedNumber = Program.rdm.Next(0,tempFilesList.Count-1);
                         FilesListSelected.Add(tempFilesList[filesSelectedNumber]);
                         tempFilesList.RemoveAt(filesSelectedNumber);
                     }

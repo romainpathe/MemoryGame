@@ -8,20 +8,24 @@ namespace MemoryGame
 {
   internal class Program
   {
-    public static Random Rdm = new Random();
-    
+    public static Random rdm = new Random();
     
     
     public static void Main(string[] args)
     {
       SetFullScreen();
-      FilesManager.InitFilesList();
+      
+      Menu.Menu.DisplayCenterMenu(2);
+      
+      /* FilesManager.InitFilesList();
       Console.WriteLine(FilesManager.FilesNumber);
       var files = new FilesManager();
       var statusFilesSelected = files.GenerateFilesSelected(2);
       var cardList = new CardManager();
       cardList.GenerateCardList(files.FilesListSelected);
-      cardList.DrawCardList();
+      cardList.DrawCardList(); */
+      
+      
       
       Console.ReadKey();
     }
@@ -52,6 +56,27 @@ namespace MemoryGame
 
     #endregion
     
+    #region Windows Size
+
+    public static int WindowWidth
+    {
+      get => WindowWidth;
+      set
+      {
+        WindowWidth = Console.WindowWidth;
+      }
+    }
+    public static int WindowHeight
+    {
+      get => WindowHeight;
+      set
+      {
+        WindowHeight = Console.WindowHeight;
+      }
+    }
+    
+
+    #endregion
     
   }
 }
