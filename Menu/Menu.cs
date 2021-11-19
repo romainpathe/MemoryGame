@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 namespace MemoryGame.Menu
 {
-    public struct MenuItem
-    {
-        public string name;
-        public string description;
-    }
-    
     public class Menu
     {
+        
+        public struct MenuItem
+        {
+            public string name;
+            public string description;
+        }
+        
         public static void DisplayCenterMenu(int nbItem)
         {
             const string title = "MemoryGames";

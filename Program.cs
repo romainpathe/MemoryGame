@@ -15,7 +15,7 @@ namespace MemoryGame
     {
       SetFullScreen();
       
-      //Menu.Menu.DisplayCenterMenu(0);
+      Menu.Menu.DisplayCenterMenu(0);
       
       /*FilesManager.InitFilesList();
       Console.WriteLine(FilesManager.FilesNumber);
