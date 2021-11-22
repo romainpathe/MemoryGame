@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="71e71d3a-1f99-488f-8f6d-34b530bd26bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Menu/Menu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Draws/CardsBoard.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MemoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MemoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/FilesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Files/FilesManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cards/CardManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Cards/CardManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemoryGame.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MemoryGame.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Menu/Menu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Menus/Menu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/MemoryGame.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/MemoryGame.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/MemoryGame.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/MemoryGame.pdb" afterDir="false" />
@@ -71,7 +72,9 @@
       <updated>1637263768657</updated>
       <workItem from="1637263772331" duration="3718000" />
       <workItem from="1637267527996" duration="13000" />
-      <workItem from="1637267547613" duration="4114000" />
+      <workItem from="1637267547613" duration="4738000" />
+      <workItem from="1637438825301" duration="3493000" />
+      <workItem from="1637508294602" duration="4468000" />
     </task>
     <servers />
   </component>

@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using MemoryGame.Cards;
 using MemoryGame.Files;
+using MemoryGame.Menus;
 
 namespace MemoryGame
 {
@@ -15,8 +16,9 @@ namespace MemoryGame
     {
       SetFullScreen();
       
-      Menu.Menu.DisplayCenterMenu(2);
-      
+      //Menu.DisplayCenterMenu(2);
+      var test = Menu.GeneretedStartMenu();
+      Menu.DisplayMenu(test);
       /* FilesManager.InitFilesList();
       Console.WriteLine(FilesManager.FilesNumber);
       var files = new FilesManager();
@@ -27,7 +29,7 @@ namespace MemoryGame
       
       
       
-      Console.ReadKey();
+      //Console.ReadKey();
     }
 
 
@@ -52,28 +54,17 @@ namespace MemoryGame
       Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
       // Allows to put the window in full screen
       ShowWindow(ThisConsole, 3);
+      WindowHeight = Console.WindowHeight;
+      WindowWidth = Console.WindowWidth;
+
     }
 
     #endregion
     
     #region Windows Size
 
-    public static int WindowWidth
-    {
-      get => WindowWidth;
-      set
-      {
-        WindowWidth = Console.WindowWidth;
-      }
-    }
-    public static int WindowHeight
-    {
-      get => WindowHeight;
-      set
-      {
-        WindowHeight = Console.WindowHeight;
-      }
-    }
+    public static int WindowWidth { get; private set; }
+    public static int WindowHeight { get; private set; }
     
 
     #endregion

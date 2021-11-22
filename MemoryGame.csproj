@@ -42,9 +42,10 @@
     <Compile Include="Cards\Card.cs" />
     <Compile Include="Cards\CardManager.cs" />
     <Compile Include="Cards\Location.cs" />
+    <Compile Include="Draws\CardsBoard.cs" />
     <Compile Include="Files\FilesManager.cs" />
     <Compile Include="Management\Status.cs" />
-    <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Menus\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,7 +53,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Draws" />
+    <Folder Include="GamesOne" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

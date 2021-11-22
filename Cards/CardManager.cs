@@ -5,7 +5,7 @@ namespace MemoryGame.Cards
 {
     public class CardManager
     {
-        public List<Card> CardList { get; set; }
+        private List<Card> CardList { get; set; }
 
 
         #region Card Management
@@ -13,11 +13,13 @@ namespace MemoryGame.Cards
         public void GenerateCardList(IEnumerable<string> filesList)
         {
             var y = 0;
+            var x = 0;
             CardList = new List<Card>();
-            foreach (var card in filesList.Select(file => new Card(file, new Location(0, y))))
+            foreach (var card in filesList.Select(file => new Card(file, new Location(x, y))))
             {
                 CardList.Add(card);
-                y += 20;
+                //y += 20;
+                x += 27;
             }
         }
 
