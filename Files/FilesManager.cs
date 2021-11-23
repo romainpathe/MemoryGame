@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,8 +45,8 @@ namespace MemoryGame.Files
                     var tempFilesList = FilesList.ToList();
                     FilesListSelected = new List<string>();
                     for (var i = 0; i < numberOfCard; i++)
-                    { 
-                        var filesSelectedNumber = Program.rdm.Next(0,tempFilesList.Count-1);
+                    {
+                        var filesSelectedNumber = Program.rdm.Next(0,tempFilesList.Count);
                         FilesListSelected.Add(tempFilesList[filesSelectedNumber]);
                         tempFilesList.RemoveAt(filesSelectedNumber);
                     }

@@ -15,15 +15,16 @@ namespace MemoryGame
     {
       SetFullScreen();
       
-      Menu.Menu.DisplayCenterMenu(0);
+      //Menu.Menu.DisplayCenterMenu(0);
       
-      /*FilesManager.InitFilesList();
-      Console.WriteLine(FilesManager.FilesNumber);
+      
+      FilesManager.InitFilesList();
+      //Console.WriteLine(FilesManager.FilesNumber);
       var files = new FilesManager();
-      var statusFilesSelected = files.GenerateFilesSelected(2);
+      var statusFilesSelected = files.GenerateFilesSelected(3);
       var cardList = new CardManager();
       cardList.GenerateCardList(files.FilesListSelected);
-      cardList.DrawCardList();*/
+      cardList.DrawCardList();
 
 
       Console.ReadKey();

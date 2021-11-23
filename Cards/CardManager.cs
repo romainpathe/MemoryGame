@@ -17,7 +17,7 @@ namespace MemoryGame.Cards
             foreach (var card in filesList.Select(file => new Card(file, new Location(0, y))))
             {
                 CardList.Add(card);
-                y += 20;
+                y += 15;
             }
         }
 

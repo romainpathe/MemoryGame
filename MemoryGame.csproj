@@ -42,6 +42,7 @@
     <Compile Include="Cards\Card.cs" />
     <Compile Include="Cards\CardManager.cs" />
     <Compile Include="Cards\Location.cs" />
+    <Compile Include="Draws\Drawing.cs" />
     <Compile Include="Files\FilesManager.cs" />
     <Compile Include="Management\Status.cs" />
     <Compile Include="Menu\Menu.cs" />
@@ -50,9 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Draws" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
