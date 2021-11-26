@@ -1,2 +1,9 @@
 .idea/
 .idea
+bin/Debug/MemoryGame.exe
+
+bin/Debug/MemoryGame.pdb
+
+obj/Debug/MemoryGame.exe
+
+obj/Debug/MemoryGame.pdb

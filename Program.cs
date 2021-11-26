@@ -35,7 +35,7 @@ namespace MemoryGame
       
       
       //Console.ReadKey();
-      cardList.DrawCardList();
+      //cardList.DrawCardList();
 
 
       Console.ReadKey();
