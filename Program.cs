@@ -21,8 +21,13 @@ namespace MemoryGame
       Menu.DisplayMenu(test);
       /* FilesManager.InitFilesList();
       Console.WriteLine(FilesManager.FilesNumber);
+      //Menu.Menu.DisplayCenterMenu(0);
+      
+      
+      FilesManager.InitFilesList();
+      //Console.WriteLine(FilesManager.FilesNumber);
       var files = new FilesManager();
-      var statusFilesSelected = files.GenerateFilesSelected(2);
+      var statusFilesSelected = files.GenerateFilesSelected(3);
       var cardList = new CardManager();
       cardList.GenerateCardList(files.FilesListSelected);
       cardList.DrawCardList(); */
@@ -30,6 +35,10 @@ namespace MemoryGame
       
       
       //Console.ReadKey();
+      cardList.DrawCardList();
+
+
+      Console.ReadKey();
     }
 
 
