@@ -45,6 +45,7 @@
     <Compile Include="Draws\CardsBoard.cs" />
     <Compile Include="Draws\Drawing.cs" />
     <Compile Include="Files\FilesManager.cs" />
+    <Compile Include="Management\Global.cs" />
     <Compile Include="Management\Status.cs" />
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Program.cs" />

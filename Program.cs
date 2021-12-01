@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using MemoryGame.Cards;
@@ -9,16 +10,14 @@ namespace MemoryGame
 {
   internal class Program
   {
-    public static Random rdm = new Random();
-    
-    
+    public static List<MenuItem> start = Menu.GeneretedStartMenu();
     public static void Main(string[] args)
     {
       SetFullScreen();
-      
+      Console.CursorVisible = false;
       //Menu.DisplayCenterMenu(2);
-      var test = Menu.GeneretedStartMenu();
-      Menu.DisplayMenu(test);
+      
+      Menu.DisplayMenu(start);
       /* FilesManager.InitFilesList();
       Console.WriteLine(FilesManager.FilesNumber);
       //Menu.Menu.DisplayCenterMenu(0);
@@ -50,6 +49,7 @@ namespace MemoryGame
     [DllImport("kernel32.dll", ExactSpelling = true)]
     private static extern IntPtr GetConsoleWindow();
     private static readonly IntPtr ThisConsole = GetConsoleWindow();
+
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
     /// <summary>
@@ -60,7 +60,7 @@ namespace MemoryGame
       // Allows you to set the size of the window
       Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight); 
       // Allows you to remove the scroll bar
-      Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+      //Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
       // Allows to put the window in full screen
       ShowWindow(ThisConsole, 3);
       WindowHeight = Console.WindowHeight;

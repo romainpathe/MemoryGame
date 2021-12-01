@@ -1,0 +1,7 @@
+C:\Users\ketch\Documents\GitHub\MemoryGame\bin\Release\MemoryGame.exe.config
+C:\Users\ketch\Documents\GitHub\MemoryGame\bin\Release\MemoryGame.exe
+C:\Users\ketch\Documents\GitHub\MemoryGame\bin\Release\MemoryGame.pdb
+C:\Users\ketch\Documents\GitHub\MemoryGame\obj\Release\MemoryGame.csproj.AssemblyReference.cache
+C:\Users\ketch\Documents\GitHub\MemoryGame\obj\Release\MemoryGame.csproj.CoreCompileInputs.cache
+C:\Users\ketch\Documents\GitHub\MemoryGame\obj\Release\MemoryGame.exe
+C:\Users\ketch\Documents\GitHub\MemoryGame\obj\Release\MemoryGame.pdb

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using MemoryGame.Cards;
 using MemoryGame.Files;
 
@@ -41,7 +42,7 @@ namespace MemoryGame.Menus
             for (var j = startH; j <= startH + hauteur; j++)
             {
                 // TODO: Check si sur pc portable j'ai toujours autant de hauteurs sur les étoiles
-                var end = start + size;
+                var end = start + size -1;
                 Console.SetCursorPosition(start, j);
                 Console.Write("*");
                 Console.SetCursorPosition(end, j);
@@ -192,10 +193,74 @@ namespace MemoryGame.Menus
         private static void StartGameOne()
         {
             Console.Clear();
-            var cardList = new CardManager();
-            //cardList.GenerateCardList(FilesManager);
-            
-            Console.ReadKey();
+            FilesManager.InitFilesList();
+            var files = new FilesManager();
+            var statusFilesSelected = files.GenerateFilesSelected(9);
+            if (statusFilesSelected.IsError)
+            {
+                Console.WriteLine("Erreur, merci de relancer le programme");
+            }
+            else
+            {
+                var cardList = new CardManager();
+                cardList.GenerateCardList(files.FilesListSelected);
+                bool end = false;
+                int lastSelect = -1;
+                cardList.DrawCardListRecu();
+                Thread.Sleep(5000);
+                cardList.DisplayFalse();
+                while (end == false)
+                {
+                    cardList.DrawCardListRecu();
+                    var key = Console.ReadKey().Key;
+                    switch (key)
+                    {
+                        case ConsoleKey.LeftArrow:
+                            if (cardList.cardSelected == 0)
+                            {
+                                cardList.cardSelected = cardList.CardList.Count - 1;
+                            }
+                            else
+                            {
+                                cardList.cardSelected--;
+                            }
+
+                            break;
+                        case ConsoleKey.RightArrow:
+                            if (cardList.cardSelected == cardList.CardList.Count - 1)
+                            {
+                                cardList.cardSelected = 0;
+                            }
+                            else
+                            {
+                                cardList.cardSelected++;
+                            }
+
+                            break;
+                        case ConsoleKey.Enter:
+                            if (!cardList.CardList[cardList.cardSelected].Display)
+                            {
+                                if (cardList.NbCardReturned() % 2 != 0)
+                                {
+                                    cardList.CardList[cardList.cardSelected].Display = true;
+                                    cardList.DrawCardListRecu();
+                                    cardList.VerifCard(cardList.CardList[lastSelect],cardList.CardList[cardList.cardSelected]);
+                                }
+                                else
+                                {
+                                    cardList.CardList[cardList.cardSelected].Display = true;
+                                    lastSelect = cardList.cardSelected;
+                                }
+                            }
+                            break;
+                        case ConsoleKey.Escape:
+                            end = true;
+                            Console.Clear();
+                            DisplayMenu(Program.start);
+                            break;
+                    }
+                }
+            }
         }
 
         private static void StartGameTwo()
