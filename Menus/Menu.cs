@@ -206,12 +206,12 @@ namespace MemoryGame.Menus
                 cardList.GenerateCardList(files.FilesListSelected);
                 bool end = false;
                 int lastSelect = -1;
-                cardList.DrawCardListRecu();
+                cardList.DrawCardList();
                 Thread.Sleep(5000);
                 cardList.DisplayFalse();
                 while (end == false)
                 {
-                    cardList.DrawCardListRecu();
+                    cardList.DrawCardList();
                     var key = Console.ReadKey().Key;
                     switch (key)
                     {
@@ -243,7 +243,7 @@ namespace MemoryGame.Menus
                                 if (cardList.NbCardReturned() % 2 != 0)
                                 {
                                     cardList.CardList[cardList.cardSelected].Display = true;
-                                    cardList.DrawCardListRecu();
+                                    cardList.DrawCardList();
                                     cardList.VerifCard(cardList.CardList[lastSelect],cardList.CardList[cardList.cardSelected]);
                                 }
                                 else

@@ -16,7 +16,7 @@ namespace MemoryGame.Cards
 
         public void GenerateCardList(IEnumerable<string> filesList)
         {
-            var y = 0;
+            var y = 1;
             var x = 0;
             CardList = new List<Card>();
             foreach (var card in filesList.Select(file => new Card(file, new Location(x, y))))
@@ -32,27 +32,10 @@ namespace MemoryGame.Cards
                 }
                 CardList.Add(card);
             }
-            lastLocation = y;
+            lastLocation = y+15;
         }
 
-        /*public void DrawCardList()
-        {
-            for (int i = 0; i < CardList.Count; i++)
-            {
-                if (i == cardSelected)
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                }
-                CardList[i].Draw();
-            }
-            Console.SetCursorPosition(0,0);
-        }*/
-
-        public void DrawCardListRecu(int i = 0)
+        public void DrawCardList(int i = 0)
         {
             if (i >= CardList.Count) return;
             var colors = ConsoleColor.Gray;
@@ -61,7 +44,7 @@ namespace MemoryGame.Cards
                 colors = ConsoleColor.Cyan;
             }
             CardList[i].Draw(colors);
-            DrawCardListRecu(i+1);
+            DrawCardList(i+1);
         }
 
         #endregion

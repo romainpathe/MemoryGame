@@ -45,6 +45,7 @@
     <Compile Include="Draws\CardsBoard.cs" />
     <Compile Include="Draws\Drawing.cs" />
     <Compile Include="Files\FilesManager.cs" />
+    <Compile Include="GamesOne\ResultOne.cs" />
     <Compile Include="Management\Global.cs" />
     <Compile Include="Management\Status.cs" />
     <Compile Include="Menus\Menu.cs" />
@@ -53,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GamesOne" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
