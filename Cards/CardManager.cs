@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using MemoryGame.Files;
 
 namespace MemoryGame.Cards
 {
@@ -10,7 +11,8 @@ namespace MemoryGame.Cards
     {
         public List<Card> CardList { get; set; }
         public int cardSelected = 0;
-        public int lastLocation = 0;
+        public int lastLocation;
+        public static int nbMin = 0;
 
         #region Card Management
 
@@ -52,9 +54,9 @@ namespace MemoryGame.Cards
 
         #region CardDisplay
 
-        public void VerifCard(Card cardOne, Card cardTwo)
+        public void VerifCard(List<Card> plateau,Card cardOne=null, Card cardTwo=null)
         {
-            if (cardOne.path != cardTwo.path)
+            if (cardOne != null && cardTwo!=null && cardOne.path != cardTwo.path )
             {
                 Thread.Sleep(2000);
                 cardOne.Display = false;
@@ -65,6 +67,11 @@ namespace MemoryGame.Cards
                 Console.SetCursorPosition(0, lastLocation + 1);
                 Console.Write("Il y a actuellement "+NbCardFind()+" paires de cartes découverte");
                 // TODO : Faire si deux carte son identique
+                if (plateau.Count/2 == NbCardFind())
+                {
+                    Result.EditResultGameOne("Nombre min pair",(nbMin/2).ToString());
+                    Result.DisplayResult();
+                }
 
             }
         }

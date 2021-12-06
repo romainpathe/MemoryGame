@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using MemoryGame.Cards;
+using MemoryGame.Draws;
 using MemoryGame.Files;
 
 namespace MemoryGame.Menus
@@ -195,7 +196,8 @@ namespace MemoryGame.Menus
             Console.Clear();
             FilesManager.InitFilesList();
             var files = new FilesManager();
-            var statusFilesSelected = files.GenerateFilesSelected(9);
+            // TODO: SelectedCard
+            var statusFilesSelected = files.GenerateFilesSelected(2);
             if (statusFilesSelected.IsError)
             {
                 Console.WriteLine("Erreur, merci de relancer le programme");
@@ -209,6 +211,7 @@ namespace MemoryGame.Menus
                 cardList.DrawCardList();
                 Thread.Sleep(5000);
                 cardList.DisplayFalse();
+                CardManager.nbMin = 0;
                 while (end == false)
                 {
                     cardList.DrawCardList();
@@ -244,13 +247,15 @@ namespace MemoryGame.Menus
                                 {
                                     cardList.CardList[cardList.cardSelected].Display = true;
                                     cardList.DrawCardList();
-                                    cardList.VerifCard(cardList.CardList[lastSelect],cardList.CardList[cardList.cardSelected]);
+                                    cardList.VerifCard(cardList.CardList,cardList.CardList[lastSelect],cardList.CardList[cardList.cardSelected]);
                                 }
                                 else
                                 {
                                     cardList.CardList[cardList.cardSelected].Display = true;
                                     lastSelect = cardList.cardSelected;
+                                    cardList.VerifCard(cardList.CardList);
                                 }
+                                CardManager.nbMin++;
                             }
                             break;
                         case ConsoleKey.Escape:
@@ -265,7 +270,6 @@ namespace MemoryGame.Menus
 
         private static void StartGameTwo()
         {
-            Console.WriteLine("GAME 2");
             Console.ReadKey();
         }
         
