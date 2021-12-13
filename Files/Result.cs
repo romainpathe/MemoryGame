@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using MemoryGame.Menus;
 
 namespace MemoryGame.Files
@@ -35,9 +36,13 @@ namespace MemoryGame.Files
             string name;
             do
             {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.CursorVisible = true;
                 Console.WriteLine("Saisir votre prénom, compris en 1 et 10 caractéres");
                 name = Console.ReadLine();
             } while (name == null || name.Length > 10 || name.Length <= 0);
+            Console.CursorVisible = false;
             var myresultGo = new Dictionary<string,string>();
             var sr = new StreamReader("Result/GameOne.txt");
             var line = sr.ReadLine();
@@ -51,17 +56,30 @@ namespace MemoryGame.Files
                 myresultGo.Add(tab[0],tab[1]);
                 line = sr.ReadLine();
             }
+            sr.Close();
 
             var t = false;
-            foreach (var keyValuePair in myresultGo.Where(keyValuePair => keyValuePair.Key == key))
+            foreach (var keyValuePair in myresultGo.Where(keyValuePair => keyValuePair.Key == key).ToList())
             {
-                myresultGo.Remove(key);
-                myresultGo.Add(key,value+" ("+name+")");
+                if (Convert.ToInt32(keyValuePair.Value.Split(' ')[0]) > Convert.ToInt32(value))
+                {
+                    myresultGo.Remove(key);
+                    myresultGo.Add(key,value+" ("+name+")");
+                }
                 t = true;
             }
-            if(t) myresultGo.Add(key,value+" ("+name+")");
+            if(!t) myresultGo.Add(key,value+" ("+name+")");
             
-            sr.Close();
+            
+
+            StreamWriter sw = new StreamWriter("Result/GameOne.txt");
+            foreach (var keyValuePair in myresultGo)
+            {
+                sw.WriteLine(keyValuePair.Key+":"+keyValuePair.Value);
+            }
+                
+            sw.Close();
+            
         }
 
         
@@ -70,6 +88,12 @@ namespace MemoryGame.Files
             InitResultGameOne();
             Console.Clear();
             var nbItem = resultGO.Count;
+            var noValue = false;
+            if (nbItem == 0)
+            {
+                nbItem = 1;
+                noValue = true;
+            }
             DisplayCenterResult(nbItem);
             while (true)
             {
@@ -80,12 +104,20 @@ namespace MemoryGame.Files
                 var startH = (Program.WindowHeight - hauteur) / 2;
 
                 int[] position = { start + 5, startH + 4 };
-                foreach (var keyValuePair in resultGO)
+                Console.ForegroundColor = ConsoleColor.Gray;
+                if (noValue)
                 {
-                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.SetCursorPosition(position[0], position[1]);
-                    Console.Write(keyValuePair.Key + " : "+keyValuePair.Value);
-                    position[1]++;
+                    Console.Write("Il n'y a encore aucun résultat !");
+                }
+                else
+                {
+                    foreach (var keyValuePair in resultGO)
+                    {
+                        Console.SetCursorPosition(position[0], position[1]);
+                        Console.Write(keyValuePair.Key + " : "+keyValuePair.Value);
+                        position[1]++;
+                    }
                 }
 
                 Console.SetCursorPosition(0, 0);

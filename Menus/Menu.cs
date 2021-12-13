@@ -197,7 +197,7 @@ namespace MemoryGame.Menus
             FilesManager.InitFilesList();
             var files = new FilesManager();
             // TODO: SelectedCard
-            var statusFilesSelected = files.GenerateFilesSelected(2);
+            var statusFilesSelected = files.GenerateFilesSelected(9);
             if (statusFilesSelected.IsError)
             {
                 Console.WriteLine("Erreur, merci de relancer le programme");
