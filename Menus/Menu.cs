@@ -4,6 +4,7 @@ using System.Threading;
 using MemoryGame.Cards;
 using MemoryGame.Draws;
 using MemoryGame.Files;
+using Timer = MemoryGame.Management.Timer;
 
 namespace MemoryGame.Menus
 {
@@ -191,13 +192,14 @@ namespace MemoryGame.Menus
             }
         }
 
+        public static Timer timer;
         private static void StartGameOne()
         {
             Console.Clear();
             FilesManager.InitFilesList();
             var files = new FilesManager();
             // TODO: SelectedCard
-            var statusFilesSelected = files.GenerateFilesSelected(9);
+            var statusFilesSelected = files.GenerateFilesSelected(2);
             if (statusFilesSelected.IsError)
             {
                 Console.WriteLine("Erreur, merci de relancer le programme");
@@ -211,6 +213,7 @@ namespace MemoryGame.Menus
                 cardList.DrawCardList();
                 Thread.Sleep(5000);
                 cardList.DisplayFalse();
+                timer = new Timer();
                 CardManager.nbMin = 0;
                 while (end == false)
                 {

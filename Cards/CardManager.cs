@@ -69,7 +69,7 @@ namespace MemoryGame.Cards
                 // TODO : Faire si deux carte son identique
                 if (plateau.Count/2 == NbCardFind())
                 {
-                    Result.EditResultGameOne("En moins de coup",(nbMin/2).ToString());
+                    Result.EditResultGameOne("En moins de coup",((nbMin/2)+1).ToString());
                     Result.DisplayResult();
                 }
 

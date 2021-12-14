@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using MemoryGame.Management;
 using MemoryGame.Menus;
 
 namespace MemoryGame.Files
@@ -20,7 +21,7 @@ namespace MemoryGame.Files
             var line = sr.ReadLine();
             while(line != null)
             {
-                var tab = line.Split(':');
+                var tab = line.Split('-');
                 if (resultGO.ContainsKey(tab[0]))
                 {
                     resultGO.Remove(tab[0]);
@@ -48,7 +49,7 @@ namespace MemoryGame.Files
             var line = sr.ReadLine();
             while(line != null)
             {
-                var tab = line.Split(':');
+                var tab = line.Split('-');
                 if (myresultGo.ContainsKey(tab[0]))
                 {
                     myresultGo.Remove(tab[0]);
@@ -59,23 +60,86 @@ namespace MemoryGame.Files
             sr.Close();
 
             var t = false;
-            foreach (var keyValuePair in myresultGo.Where(keyValuePair => keyValuePair.Key == key).ToList())
+            var infotime = false;
+            string key1="";
+            string key2="";
+            string value1="";
+            string value2="";
+            var time = Menu.timer.time;
+            foreach (var keyValuePair in myresultGo)
             {
-                if (Convert.ToInt32(keyValuePair.Value.Split(' ')[0]) > Convert.ToInt32(value))
+                if (keyValuePair.Key == key)
+                {
+                    key1 = keyValuePair.Key;
+                    value1 = keyValuePair.Value;
+                    t = true;
+                }
+                if (keyValuePair.Key == "Meilleur temps")
+                {
+                    key2 = keyValuePair.Key;
+                    value2 = keyValuePair.Value;
+                    infotime = true;
+                }
+            }
+
+            if (!t)
+            {
+                myresultGo.Add(key,value+" ("+name+")");
+            }
+            else
+            {
+                if (Convert.ToInt32(value1.Split(' ')[0]) > Convert.ToInt32(value))
                 {
                     myresultGo.Remove(key);
-                    myresultGo.Add(key,value+" ("+name+")");
+                    myresultGo.Add(key, value + " (" + name + ")");
                 }
-                t = true;
             }
-            if(!t) myresultGo.Add(key,value+" ("+name+")");
+
+            if (!infotime)
+            {
+                myresultGo.Add("Meilleur temps",time.heures+":"+time.minutes+":"+time.secondes+" ("+name+")");
+            }
+            else
+            {
+                infotime = true;
+                var newtime = new Time();
+                var timelist = value2.Split(':');
+                timelist[2] = timelist[2].Substring(0,timelist[2].IndexOf('('));
+                newtime.secondes = Convert.ToInt32(timelist[2]);
+                newtime.minutes = Convert.ToInt32(timelist[1]);;
+                newtime.heures = Convert.ToInt32(timelist[0]);;
+                    
+                if (newtime.heures <= time.heures)
+                {
+                    if (newtime.heures < time.heures)
+                    {
+                        myresultGo.Remove(key2);
+                        myresultGo.Add("Meilleur temps", time.heures+":"+time.minutes+":"+time.secondes+" ("+name+")");
+                    }
+                    else
+                    {
+                        if (newtime.minutes < time.minutes)
+                        {
+                            myresultGo.Remove(key2);
+                            myresultGo.Add("Meilleur temps", time.heures+":"+time.minutes+":"+time.secondes+" ("+name+")");
+                        }else
+                        {
+                            if (newtime.secondes < time.secondes)
+                            {
+                                myresultGo.Remove(key2);
+                                myresultGo.Add("Meilleur temps", time.heures+":"+time.minutes+":"+time.secondes+" ("+name+")");
+                            }
+                        }
+                    }
+                }
+            }
             
             
 
             StreamWriter sw = new StreamWriter("Result/GameOne.txt");
             foreach (var keyValuePair in myresultGo)
             {
-                sw.WriteLine(keyValuePair.Key+":"+keyValuePair.Value);
+                sw.WriteLine(keyValuePair.Key+"-"+keyValuePair.Value);
             }
                 
             sw.Close();
