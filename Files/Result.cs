@@ -61,10 +61,13 @@ namespace MemoryGame.Files
 
             var t = false;
             var infotime = false;
+            var besttime = false;
             string key1="";
             string key2="";
+            string bestkey="";
             string value1="";
             string value2="";
+            string bestvalue="";
             var time = Menu.timer.time;
             foreach (var keyValuePair in myresultGo)
             {
@@ -74,11 +77,17 @@ namespace MemoryGame.Files
                     value1 = keyValuePair.Value;
                     t = true;
                 }
-                if (keyValuePair.Key == "Meilleur temps")
+                if (keyValuePair.Key == key)
                 {
                     key2 = keyValuePair.Key;
                     value2 = keyValuePair.Value;
                     infotime = true;
+                }
+                if (keyValuePair.Key == key)
+                {
+                    bestkey = keyValuePair.Key;
+                    bestvalue = keyValuePair.Value;
+                    besttime = true;
                 }
             }
 
@@ -132,6 +141,13 @@ namespace MemoryGame.Files
                         }
                     }
                 }
+            }
+
+            if (!besttime)
+            {
+                // TODO: Mettre la bonne variable (voir a l'intérieur de fichier de résultat)
+                myresultGo.Add("Meilleur Ration Temps/Coups",bestvalue+" ("+name+")");
+                
             }
             
             

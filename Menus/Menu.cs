@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using MemoryGame.Cards;
-using MemoryGame.Draws;
 using MemoryGame.Files;
 using Timer = MemoryGame.Management.Timer;
 
@@ -199,7 +198,7 @@ namespace MemoryGame.Menus
             FilesManager.InitFilesList();
             var files = new FilesManager();
             // TODO: SelectedCard
-            var statusFilesSelected = files.GenerateFilesSelected(2);
+            var statusFilesSelected = files.GenerateFilesSelected(11);
             if (statusFilesSelected.IsError)
             {
                 Console.WriteLine("Erreur, merci de relancer le programme");

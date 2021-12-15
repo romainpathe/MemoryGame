@@ -62,6 +62,18 @@ namespace MemoryGame.Management
             thread.Abort();
         }
 
+
+        public int ConvertToSecond()
+        {
+            var result = 0;
+
+            result += time.secondes;
+            result += time.minutes * 60;
+            result += time.heures * 60 * 60;
+
+            return result;
+        }
+
         
         
         

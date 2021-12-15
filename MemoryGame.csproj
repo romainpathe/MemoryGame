@@ -42,8 +42,6 @@
     <Compile Include="Cards\Card.cs" />
     <Compile Include="Cards\CardManager.cs" />
     <Compile Include="Cards\Location.cs" />
-    <Compile Include="Draws\CardsBoard.cs" />
-    <Compile Include="Draws\Drawing.cs" />
     <Compile Include="Files\FilesManager.cs" />
     <Compile Include="Files\Result.cs" />
     <Compile Include="Management\Global.cs" />
