@@ -30,8 +30,9 @@ namespace MemoryGame.Files
         #endregion
         
         
-        public Status GenerateFilesSelected(int numberOfCard, int type = 0)
+        public Status GenerateFilesSelected(int numberOfCard, int type = 0, int falseCard = 0)
         {
+            int tempFalseCard = falseCard;
             var status = new Status();
             if (FilesList == null)
             {
@@ -44,10 +45,17 @@ namespace MemoryGame.Files
                 {
                     var tempFilesList = FilesList.ToList();
                     var tempFilesListSelected = new List<string>();
+                    
                     for (var i = 0; i < numberOfCard; i++)
                     {
                         var filesSelectedNumber = Global.rdm.Next(0,tempFilesList.Count);
-                        tempFilesListSelected.Add(tempFilesList[filesSelectedNumber]);
+                        if (type == 1 && tempFalseCard > 0)
+                        {
+                            tempFalseCard--;
+                        }else
+                        {
+                            tempFilesListSelected.Add(tempFilesList[filesSelectedNumber]);
+                        }
                         tempFilesListSelected.Add(tempFilesList[filesSelectedNumber]);
                         tempFilesList.RemoveAt(filesSelectedNumber);
                     }
@@ -55,7 +63,7 @@ namespace MemoryGame.Files
                     FilesListSelected = new List<string>();
                     while (tempFilesListSelected.Count > 0)
                     {
-                        var tempFilesListSelectedNumber = Global.rdm.Next(0, tempFilesListSelected.Count-1);
+                        var tempFilesListSelectedNumber = Global.rdm.Next(0, tempFilesListSelected.Count);
                         FilesListSelected.Add(tempFilesListSelected[tempFilesListSelectedNumber]);
                         tempFilesListSelected.RemoveAt(tempFilesListSelectedNumber);
                     }

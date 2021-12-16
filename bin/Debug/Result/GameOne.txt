@@ -1,3 +1,3 @@
-En moins de coup-2 (Romain)
-Meilleur temps-0:0:18 (Romain)
-Meilleur Ration Temps/Coups-Xc|0:0:0 (Romain)
+Meilleur temps-0:0:0 (Test2)
+Meilleur Ration Temps/Coups-2 | 0:0:0 (Test2)
+En moins de coup-2 (Test2)

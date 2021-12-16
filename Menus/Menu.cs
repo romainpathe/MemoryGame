@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading;
 using MemoryGame.Cards;
 using MemoryGame.Files;
@@ -18,7 +19,7 @@ namespace MemoryGame.Menus
         private static void DisplayCenterMenu(int nbItem)
         {
             const string title = "MemoryGames";
-            const string footer = "Projet créer par Romain Pathé";
+            const string footer = "Projet créé par Romain Pathé";
             var size = Convert.ToInt32(Program.WindowWidth*0.25);
             var start = (Program.WindowWidth - size) / 2;
             
@@ -42,7 +43,6 @@ namespace MemoryGame.Menus
             }
             for (var j = startH; j <= startH + hauteur; j++)
             {
-                // TODO: Check si sur pc portable j'ai toujours autant de hauteurs sur les étoiles
                 var end = start + size -1;
                 Console.SetCursorPosition(start, j);
                 Console.Write("*");
@@ -131,18 +131,18 @@ namespace MemoryGame.Menus
 
         private static void StartFunction(int menuSelected)
         {
-            if (menuSelected == 0)
+            switch (menuSelected)
             {
-                StartGameOne();
-            }
-            else if(menuSelected == 1)
-            {
-                StartGameTwo();
-            }
-            else
-            {
-                Console.Clear();
-                LeaveGame();
+                case 0:
+                    StartGameOne();
+                    break;
+                case 1:
+                    StartGameTwo();
+                    break;
+                default:
+                    Console.Clear();
+                    LeaveGame();
+                    break;
             }
         }
 
@@ -153,7 +153,7 @@ namespace MemoryGame.Menus
                 var msg = new Stack<string>();
                 msg.Push("Merci d'avoir joué au MemoryGame");
                 msg.Push("N'hésitez pas a revenir jouer");
-                msg.Push("Il y a souvent des mises a jours");
+                msg.Push("Il y a souvent des mises à jour");
                 msg.Push(" ");
                 msg.Push("Appuyez sur Entrée pour quitter");
                 var nbItem = msg.Count;
@@ -187,7 +187,6 @@ namespace MemoryGame.Menus
                         Console.Write(" ");
                         continue;
                 }
-                break;
             }
         }
 
@@ -197,8 +196,10 @@ namespace MemoryGame.Menus
             Console.Clear();
             FilesManager.InitFilesList();
             var files = new FilesManager();
+            
+            
             // TODO: SelectedCard
-            var statusFilesSelected = files.GenerateFilesSelected(11);
+            var statusFilesSelected = files.GenerateFilesSelected(2);
             if (statusFilesSelected.IsError)
             {
                 Console.WriteLine("Erreur, merci de relancer le programme");
@@ -214,7 +215,7 @@ namespace MemoryGame.Menus
                 cardList.DisplayFalse();
                 timer = new Timer();
                 CardManager.nbMin = 0;
-                while (end == false)
+                while (!end)
                 {
                     cardList.DrawCardList();
                     var key = Console.ReadKey().Key;
@@ -249,7 +250,7 @@ namespace MemoryGame.Menus
                                 {
                                     cardList.CardList[cardList.cardSelected].Display = true;
                                     cardList.DrawCardList();
-                                    cardList.VerifCard(cardList.CardList,cardList.CardList[lastSelect],cardList.CardList[cardList.cardSelected]);
+                                    cardList.VerifCard(cardList.CardList,0,cardList.CardList[lastSelect],cardList.CardList[cardList.cardSelected]);
                                 }
                                 else
                                 {
@@ -270,9 +271,107 @@ namespace MemoryGame.Menus
             }
         }
 
+        public static int falseCard = 1;
+
         private static void StartGameTwo()
         {
-            Console.ReadKey();
+            Console.Clear();
+            FilesManager.InitFilesList();
+            var files = new FilesManager();
+            // TODO: SelectedCard
+            int nbCardSelected = SelectCardNumber(10, FilesManager.FilesNumber-2,"Nombre de carte que vous souhaitez mettre :");
+            switch (SelectCardNumber(1, 4,"Séléction de la difficulté :"))
+            {
+                case 1:
+                    falseCard = nbCardSelected / 10;
+                    break;
+                case 2:
+                    falseCard = nbCardSelected / 8;
+                    break;
+                case 3:
+                    falseCard = nbCardSelected / 6;
+                    break;
+                case 4:
+                    falseCard = nbCardSelected / 4;
+                    break;
+            }
+
+            if (FilesManager.FilesNumber-nbCardSelected <= falseCard)
+            {
+                falseCard = 2;
+            }
+            var statusFilesSelected = files.GenerateFilesSelected(nbCardSelected+falseCard,1,falseCard);
+            if (statusFilesSelected.IsError)
+            {
+                Console.WriteLine("Erreur, merci de relancer le programme");
+            }
+            else
+            {
+                var cardList = new CardManager();
+                cardList.GenerateCardList(files.FilesListSelected);
+                var end = false;
+                var lastSelect = -1;
+                cardList.DrawCardList();
+                Thread.Sleep(5000);
+                cardList.DisplayFalse();
+                timer = new Timer();
+                CardManager.nbMin = 0;
+                while (!end)
+                {
+                    cardList.DrawCardList();
+                    var key = Console.ReadKey().Key;
+                    switch (key)
+                    {
+                        case ConsoleKey.LeftArrow:
+                            if (cardList.cardSelected == 0)
+                            {
+                                cardList.cardSelected = cardList.CardList.Count - 1;
+                            }
+                            else
+                            {
+                                cardList.cardSelected--;
+                            }
+
+                            break;
+                        case ConsoleKey.RightArrow:
+                            if (cardList.cardSelected == cardList.CardList.Count - 1)
+                            {
+                                cardList.cardSelected = 0;
+                            }
+                            else
+                            {
+                                cardList.cardSelected++;
+                            }
+
+                            break;
+                        case ConsoleKey.Enter:
+                            if (!cardList.CardList[cardList.cardSelected].Display)
+                            {
+                                if (cardList.NbCardReturned() % 2 != 0)
+                                {
+                                    cardList.CardList[cardList.cardSelected].Display = true;
+                                    cardList.DrawCardList();
+                                    cardList.VerifCard(cardList.CardList,1,cardList.CardList[lastSelect],cardList.CardList[cardList.cardSelected]);
+                                }
+                                else
+                                {
+                                    cardList.CardList[cardList.cardSelected].Display = true;
+                                    lastSelect = cardList.cardSelected;
+                                    cardList.VerifCard(cardList.CardList,1);
+                                }
+                                CardManager.nbMin++;
+                            }
+                            break;
+                        case ConsoleKey.Escape:
+                            end = true;
+                            Console.Clear();
+                            DisplayMenu(Program.start);
+                            break;
+                        default:
+                            continue;
+                    }
+                }
+            }
         }
         
         public static List<MenuItem> GeneretedStartMenu()
@@ -292,7 +391,51 @@ namespace MemoryGame.Menus
             
             return menu;
         }
-        
+
+
+        public static int SelectCardNumber(int min, int max,string title)
+        {
+            int result;
+            int nbItem = 3;
+            do
+            {
+                Console.Clear();
+                DisplayCenterMenu(nbItem);
+                var size = Convert.ToInt32(Program.WindowWidth * 0.25);
+                var start = (Program.WindowWidth - size) / 2;
+
+                int hauteur = nbItem + 7;
+                var startH = (Program.WindowHeight - hauteur) / 2;
+                int[] position = { start + 5, startH + 4 };
+                
+                for (var i = 0; i < nbItem; i++)
+                {
+                    Console.SetCursorPosition(position[0], position[1]);
+                    switch (i)
+                    {
+                        case 0:
+                            Console.Write(title);
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            Console.Write("(Minimum: "+min+" | Maximum: "+max+")");
+                            break;
+                        case 3:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Le nombre saisie n'est pas valide !");
+                            break;
+                    }
+                    position[1]++;
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                Console.SetCursorPosition(position[0], position[1]-nbItem+1);
+                result = Convert.ToInt32(Console.ReadLine());
+                if (nbItem == 3) nbItem++;
+            } while (result < min || result > max);
+            Console.Clear();
+            return result;
+        }
         
     }
 }

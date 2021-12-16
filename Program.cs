@@ -14,6 +14,7 @@ namespace MemoryGame
     public static void Main(string[] args)
     {
       SetFullScreen();
+      Console.Title = "Memory de Romain Pathé";
       Console.CursorVisible = false;
       
       Menu.DisplayMenu(start);

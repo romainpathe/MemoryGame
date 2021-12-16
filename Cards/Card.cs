@@ -132,7 +132,7 @@ namespace MemoryGame.Cards
                 }
                 spacey++;
             }
-           
+           Console.SetCursorPosition(0,0);
         }
 
         #endregion

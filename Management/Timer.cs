@@ -51,7 +51,7 @@ namespace MemoryGame.Management
                 {
                     Console.Clear();
                     Console.SetCursorPosition(0,0);
-                    Console.Write("Pour le bien de votre ordinateur et de la planéte, le programme c'est arréter tous seul !");
+                    Console.Write("Pour le bien de votre ordinateur et de la planéte, le programme s'est arrété tout seul !");
                     Thread.Sleep(10000);
                     Environment.Exit(0);
                 }  
@@ -63,7 +63,7 @@ namespace MemoryGame.Management
         }
 
 
-        public int ConvertToSecond()
+        public static int ConvertToSecond(Time time)
         {
             var result = 0;
 

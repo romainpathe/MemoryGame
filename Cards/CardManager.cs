@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using MemoryGame.Files;
+using MemoryGame.Management;
+using MemoryGame.Menus;
+using Timer = System.Timers.Timer;
 
 namespace MemoryGame.Cards
 {
@@ -54,36 +57,67 @@ namespace MemoryGame.Cards
 
         #region CardDisplay
 
-        public void VerifCard(List<Card> plateau,Card cardOne=null, Card cardTwo=null)
+        public void VerifCard(List<Card> plateau,int type = 0,Card cardOne=null, Card cardTwo=null)
         {
-            if (cardOne != null && cardTwo!=null && cardOne.path != cardTwo.path )
+            switch (type)
             {
-                Thread.Sleep(2000);
-                cardOne.Display = false;
-                cardTwo.Display = false;
-            }
-            else
-            {
-                Console.SetCursorPosition(0, lastLocation + 1);
-                Console.Write("Il y a actuellement "+NbCardFind()+" paires de cartes découverte");
-                // TODO : Faire si deux carte son identique
-                if (plateau.Count/2 == NbCardFind())
+                case 0 when cardOne != null && cardTwo!=null && cardOne.path != cardTwo.path:
+                    Thread.Sleep(2000);
+                    cardOne.Display = false;
+                    cardTwo.Display = false;
+                    break;
+                case 0:
                 {
-                    Result.EditResultGameOne("En moins de coup",((nbMin/2)+1).ToString());
-                    Result.DisplayResult();
+                    Console.SetCursorPosition(0, lastLocation + 1);
+                    Console.Write("Il y a actuellement "+NbCardFind()+" paires de cartes découverte");
+                    if (plateau.Count / 2 != NbCardFind()) return;
+                    Menu.timer.StopTimer();
+                    Result.EditResultGameOne((nbMin/2)+1);
+                    Result.DisplayResultGame1();
+                    break;
                 }
-
+                case 1 when cardOne != null && cardTwo!=null && cardOne.path != cardTwo.path:
+                    Thread.Sleep(2000);
+                    cardOne.Display = false;
+                    cardTwo.Display = false;
+                    break;
+                case 1:
+                {
+                    if ((plateau.Count-Menu.falseCard) / 2 != NbCardFind()) return;
+                    Menu.timer.StopTimer();
+                    Result.EditResultGameTwo((nbMin/2)+1);
+                    Result.DisplayResultGameTwo();
+                    break;
+                }
             }
         }
 
-        public int NbCardFind()
+        public int NbCardFind(int type = 0)
         {
-            return CardList.Count(card => card.Display)/2;
+            var result = 0;
+            switch (type)
+            {
+                case 0:
+                    result = CardList.Count(card => card.Display) / 2;
+                    break;
+                case 1:
+                    result = (CardList.Count(card => card.Display)) / 2;
+                    break;
+            }
+            return result;
         }
         
-        public int NbCardReturned()
+        public int NbCardReturned(int type = 0)
         {
-            return CardList.Count(card => card.Display);
+            int result;
+            if (type == 0)
+            {
+                result = CardList.Count(card => card.Display);
+            }else
+            {
+                result = CardList.Count(card => card.Display);
+            }
+            return result;
         }
 
         public void DisplayFalse()
